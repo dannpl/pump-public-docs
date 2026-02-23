@@ -80,7 +80,7 @@ export const createToken = async () => {
     }).compileToV0Message(),
   );
 
-  tx.addSignature(creator.publicKey, creator.secretKey);
+  tx.sign([creator, mint]);
 
   console.log("🚀 Sending transaction...");
   await CONNECTION.sendRawTransaction(tx.serialize());
@@ -89,3 +89,5 @@ export const createToken = async () => {
 };
 
 createToken();
+
+// Example: https://solscan.io/tx/4L1LapFUMwxNAcHbQ9Y9i6a7LZCXL23gZbDk6HCcirBLYVpVfPfzixdgEDcjtycH1rvs9DVreskRDMtXA5nPK3JT

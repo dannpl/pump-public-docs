@@ -49,11 +49,6 @@ export const createToken = async () => {
 
   const global = await onlinePumpSdk.fetchGlobal();
   const solAmount = new BN(0.1 * 10 ** 9); // 0.1 SOL
-  const { bondingCurve } = await onlinePumpSdk.fetchBuyState(
-    mint.publicKey,
-    creator.publicKey,
-  );
-  const feeConfig = await onlinePumpSdk.fetchFeeConfig();
 
   const createIx = await pumpSdk.createV2AndBuyInstructions({
     global,
@@ -65,9 +60,9 @@ export const createToken = async () => {
     user: creator.publicKey,
     amount: getBuyTokenAmountFromSolAmount({
       global,
-      feeConfig,
-      mintSupply: new BN(1_000 * 10 ** 6),
-      bondingCurve,
+      feeConfig: null,
+      mintSupply: null,
+      bondingCurve: null,
       amount: solAmount,
     }),
     solAmount,
